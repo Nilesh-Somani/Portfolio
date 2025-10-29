@@ -1,4 +1,4 @@
-const API_URL = 'https://portfolio-server-8r3q.onrender.com';
+const API_URL = import.meta.env.VITE_API_URL || '/';
 
 export const sendContactForm = async (formData) => {
   try {
