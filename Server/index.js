@@ -8,7 +8,12 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors());
+app.use(cors({
+  origin: ['https://nilesh-somani.onrender.com'], // Your frontend Render domain
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type'],
+}));
+
 app.use(express.json());
 
 app.get('/', (req, res) => {
@@ -18,11 +23,11 @@ app.get('/', (req, res) => {
 app.post('/api/contact', async (req, res) => {
   try {
     const { name, email, subject, message } = req.body;
-    
+
     if (!name || !email || !message) {
-      return res.status(400).json({ 
-        success: false, 
-        message: 'Please provide all required fields.' 
+      return res.status(400).json({
+        success: false,
+        message: 'Please provide all required fields.'
       });
     }
 
@@ -30,9 +35,9 @@ app.post('/api/contact', async (req, res) => {
     res.json(result);
   } catch (error) {
     console.error('Server error:', error);
-    res.status(500).json({ 
-      success: false, 
-      message: 'An error occurred while processing your request.' 
+    res.status(500).json({
+      success: false,
+      message: 'An error occurred while processing your request.'
     });
   }
 });
