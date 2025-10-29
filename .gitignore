@@ -1,0 +1,14 @@
+# Ignore node modules (root and client)
+node_modules/
+
+# Ignore files created by VS Code
+.vscode/
+
+# OS generated files
+desktop.ini
+
+# Lockfiles and package manager logs
+package-lock.json
+
+# Environment files
+.env

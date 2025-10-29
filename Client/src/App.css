@@ -1,0 +1,473 @@
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  10%,
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+.animate-fade-in-out {
+  animation: fadeInOut 3s ease-in-out forwards;
+}
+
+/* --- typing cursor blink --- */
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1
+  }
+
+  50% {
+    opacity: 0
+  }
+}
+
+/* Base look (kept) */
+.typewriter-line {
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  position: relative;
+}
+
+.typewriter-line::after {
+  content: '|';
+  /* cursor character */
+  position: absolute;
+  right: 0;
+  color: cyan;
+  animation: blink 0.5s step-end infinite;
+}
+
+/* ========================= DESKTOP 2-line sequence Total cycle: 10s L1: type 0–20%, hold 20–30%, erase 30–50% L2: idle 0–50%, type 50–70%, hold 70–80%, erase 80–100% ========================= */
+@keyframes desktopLine1 {
+  0% {
+    width: 0;
+  }
+
+  20% {
+    width: calc(100% + 10px);
+  }
+
+  /* type L1 */
+  90% {
+    width: calc(100% + 10px);
+  }
+
+  /* keep L1 shown while L2 types & erases */
+  100% {
+    width: 0;
+  }
+
+  /* erase L1 last */
+}
+
+@keyframes desktopLine2 {
+  0% {
+    width: 0;
+  }
+
+  40% {
+    width: 0;
+  }
+
+  /* wait for L1 to finish typing */
+  60% {
+    width: calc(100% + 10px);
+  }
+
+  /* type L2 */
+  70% {
+    width: calc(100% + 10px);
+  }
+
+  /* brief hold */
+  90% {
+    width: 0;
+  }
+
+  /* erase L2 before L1 */
+  100% {
+    width: 0;
+  }
+}
+
+/* keep your step-based typing */
+.desktop-line1 {
+  animation: desktopLine1 10s steps(30, end) infinite;
+}
+
+.desktop-line2 {
+  animation: desktopLine2 10s steps(24, end) infinite;
+}
+
+/* ========================= MOBILE 3-line sequence Total cycle: 12s L1: type 0–16.666%, hold 16.666–83.333%, erase 83.333–100% L2: idle 0–16.666%, type 16.666–33.333%, hold 33.333–66.666%, erase 66.666–83.333% L3: idle 0–33.333%, type 33.333–50%, erase 50–66.666%, idle 66.666–100% ========================= */
+@keyframes mobileLine1 {
+  0% {
+    width: 0
+  }
+
+  16.666% {
+    width: 100%
+  }
+
+  /* typing */
+  83.333% {
+    width: 100%
+  }
+
+  /* hold */
+  100% {
+    width: 0
+  }
+
+  /* erase */
+}
+
+@keyframes mobileLine2 {
+  0% {
+    width: 0
+  }
+
+  16.666% {
+    width: 0
+  }
+
+  /* idle */
+  33.333% {
+    width: 100%
+  }
+
+  /* typing */
+  66.666% {
+    width: 100%
+  }
+
+  /* hold */
+  83.333% {
+    width: 0
+  }
+
+  /* erase */
+  100% {
+    width: 0
+  }
+}
+
+@keyframes mobileLine3 {
+  0% {
+    width: 0
+  }
+
+  33.333% {
+    width: 0
+  }
+
+  /* idle */
+  50% {
+    width: 100%
+  }
+
+  /* typing */
+  66.666% {
+    width: 0
+  }
+
+  /* erase */
+  100% {
+    width: 0
+  }
+}
+
+.mobile-line1,
+.mobile-line2,
+.mobile-line3 {
+  display: block;
+  /* ensure each starts on a new line */
+}
+
+.mobile-line1 {
+  animation: mobileLine1 12s steps(18, end) infinite;
+}
+
+.mobile-line2 {
+  animation: mobileLine2 12s steps(24, end) infinite;
+}
+
+.mobile-line3 {
+  animation: mobileLine3 12s steps(26, end) infinite;
+}
+
+/* retro start button pulse & pixel effect */
+.retro-start {
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.6), inset 0 -3px 0 rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  font-family: monospace;
+}
+
+.retro-start:active {
+  transform: translateY(2px);
+}
+
+/* Animated hamburger */
+.hamburger {
+  width: 26px;
+  height: 18px;
+  display: inline-block;
+  position: relative;
+}
+.hamburger span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #2dd4bf; /* cyan-400 */
+  border-radius: 2px;
+  transition: transform 0.35s cubic-bezier(.2,.8,.2,1), opacity 0.2s ease, top 0.35s cubic-bezier(.2,.8,.2,1);
+}
+.hamburger span:nth-child(1) { top: 0; }
+.hamburger span:nth-child(2) { top: 8px; }
+.hamburger span:nth-child(3) { top: 16px; }
+.hamburger.open span:nth-child(1) {
+  top: 8px;
+  transform: rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+.hamburger.open span:nth-child(3) {
+  top: 8px;
+  transform: rotate(-45deg);
+}
+
+/* small focus ring for accessibility */
+.hamburger:focus-visible { outline: 3px solid rgba(45,212,191,0.2); border-radius: 4px; }
+
+/* Typewriter cursor */
+.typewriter-cursor {
+  display: inline-block;
+  margin-left: 2px;
+  color: #9fe6ff;
+  animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1 }
+  50% { opacity: 0 }
+}
+
+/* loading bar animation (used in route loader) */
+@keyframes loadingMove {
+  0% {
+    transform: translateX(-100%)
+  }
+
+  50% {
+    transform: translateX(0%)
+  }
+
+  100% {
+    transform: translateX(100%)
+  }
+}
+
+.animate-loading-bar {
+  width: 40%;
+  height: 100%;
+  animation: loadingMove 1s linear infinite;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.28));
+}
+
+/* small subtle hover glints for certificate cards */
+.certificate-glint:hover {
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.06), 0 0 40px rgba(255, 255, 255, 0.02);
+  transform: translateY(-2px);
+}
+
+/* small utility */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* responsive tweaks kept minimal so your layout doesn't break */
+@media (max-width: 768px) {
+  .parallax-layer {
+    background-attachment: scroll;
+  }
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(138, 43, 226, 0.25));
+  border: 1px solid rgba(0, 255, 255, 0.5);
+  color: #9fe6ff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 10px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  min-width: min-content;
+  max-width: 150px;
+  width: max-content;
+  white-space: normal;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.2), 0 0 20px rgba(138, 43, 226, 0.3);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  z-index: 20;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+/* Arrow indicator */
+.tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid rgba(0, 255, 255, 0.5);
+}
+
+/* Show on hover */
+.group:hover .tooltip {
+  opacity: 1;
+}
+
+/* Data-tooltip attribute styling */
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(138, 43, 226, 0.25));
+  border: 1px solid rgba(0, 255, 255, 0.5);
+  color: #9fe6ff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 10px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  min-width: min-content;
+  max-width: 200px;
+  width: max-content;
+  white-space: normal;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.2), 0 0 20px rgba(138, 43, 226, 0.3);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  z-index: 20;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+[data-tooltip]::after {
+  content: '';
+  position: absolute;
+  bottom: calc(100% - 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid rgba(0, 255, 255, 0.5);
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+[data-tooltip]:hover::before,
+[data-tooltip]:hover::after {
+  opacity: 1;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 640px) {
+  .tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    padding: 4px 8px;
+    margin-bottom: 8px;
+    width: auto;
+    min-width: 60px;
+    max-width: 120px;
+  }
+  
+  .group {
+    position: relative;
+  }
+  
+  .tooltip {
+    margin: 0 auto;
+  }
+  
+  .group:first-child .tooltip {
+    left: 0;
+    transform: none;
+  }
+  
+  .group:last-child .tooltip {
+    left: auto;
+    right: 0;
+    transform: none;
+  }
+  
+  .group:first-child .tooltip::after {
+    left: 20%;
+  }
+  
+  .group:last-child .tooltip::after {
+    left: 80%;
+    /* align properly */
+    margin: 0 auto;
+    /* keep centered in container */
+  }
+}
+
+/* html, body {
+  background: linear-gradient(to bottom right, #1a0033, #001a66, #0a0033);
+  min-height: 100%;
+  overflow-x: hidden;
+} */
+
+body {
+  background-attachment: fixed;
+  color: white;
+}
+
+/* Ensure sections blend seamlessly */
+section {
+  background: transparent;
+}
