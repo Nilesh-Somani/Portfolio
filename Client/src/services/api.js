@@ -1,4 +1,4 @@
-const API_URL = 'https://portfolio-server-8r3q.onrender.com/';
+const API_URL = 'https://portfolio-server-8r3q.onrender.com';
 
 export const sendContactForm = async (formData) => {
   try {
