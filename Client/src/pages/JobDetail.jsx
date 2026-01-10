@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Navigate } from "react-router-dom";
 import { jobs } from "../data/jobs.js";
 
 export default function JobDetail() {
@@ -7,12 +7,7 @@ export default function JobDetail() {
     const navigate = useNavigate();
     const item = jobs.find((j) => j.id === parseInt(id));
 
-    if (!item)
-        return (
-            <div className="min-h-screen flex items-center justify-center text-white">
-                Job not found.
-            </div>
-        );
+    if (!item) return <Navigate to="/jobs" replace />;
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white font-mono pt-10 pb-10">

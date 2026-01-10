@@ -1,16 +1,14 @@
 // src/pages/ProjectDetail.jsx
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Navigate } from "react-router-dom";
 import { projects } from "../data/projects";
 
 export default function ProjectDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const project =
-    projects.find((p) => p.id === parseInt(id)) || {
-      title: "Unknown",
-      details: "No details available",
-    };
+  const project = projects.find((p) => p.id === parseInt(id));
+
+  if (!project) return <Navigate to="/projects" replace />;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white font-mono pt-10 pb-10">

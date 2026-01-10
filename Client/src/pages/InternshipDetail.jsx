@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Navigate } from "react-router-dom";
 import { internships } from "../data/internships.js";
 
 export default function InternshipDetail() {
@@ -7,12 +7,7 @@ export default function InternshipDetail() {
   const navigate = useNavigate();
   const item = internships.find((i) => i.id === parseInt(id));
 
-  if (!item)
-    return (
-      <div className="min-h-screen flex items-center justify-center text-white">
-        Internship not found.
-      </div>
-    );
+  if (!item) return <Navigate to="/internships" replace />;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white font-mono pt-10 pb-10">

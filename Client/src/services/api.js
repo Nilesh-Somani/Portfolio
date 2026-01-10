@@ -1,27 +1,18 @@
 const API_URL = import.meta.env.VITE_API_URL || '/';
 
-export const sendContactForm = async (formData) => {
+export const sendContactForm = async (data) => {
   try {
-    const response = await fetch(`${API_URL}/api/contact`, {
-      method: 'POST',
+    await fetch(API_URL, {
+      method: "POST",
+      body: JSON.stringify(data),
+      mode: "no-cors", // important
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        name: formData.name,
-        email: formData.email,
-        subject: formData.subject,
-        message: formData.message,
-      }),
     });
 
-    const data = await response.json();
-    return data;
+    return { success: true };
   } catch (error) {
-    console.error('API Error:', error);
-    return {
-      success: false,
-      message: 'Failed to send message. Please try again later.',
-    };
+    return { success: false, message: error.message };
   }
 };
