@@ -1,6 +1,10 @@
 # Ignore node modules (root and client)
 node_modules/
 
+# Build output (client)
+dist/
+build/
+
 # Ignore files created by VS Code
 .vscode/
 
